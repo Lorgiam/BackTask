@@ -9,29 +9,30 @@ import {
 } from '@nestjs/common';
 import { TaskDto } from './dto/task.dto';
 import { TaskService } from './task.service';
+import { Task } from './interfaces/task.interface';
 
 @Controller('task')
 export class TaskController {
-  constructor(private _taskService: TaskService) {}
+  constructor(private _taskService: TaskService) { }
 
   @Get()
-  getTask() {
-    return 'get task';
+  getTasks(): Promise<Task[]> {
+    return this._taskService.getTasks();
+  }
+  @Get(':id')
+  getTask(@Param('id') id: string): Promise<Task> {
+    return this._taskService.getTask(id);
   }
   @Post()
-  createTask(@Body() createTaskDto: TaskDto): string {
-    // tslint:disable-next-line:no-console
-    console.log(createTaskDto);
-    return 'create task';
+  createTask(@Body() task: TaskDto): Promise<Task> {
+    return this._taskService.createTask(task);
   }
   @Put(':id')
-  updateTask(@Body() task: TaskDto, @Param(':id') id) {
-    return 'update task';
+  updateTask(@Body() task: TaskDto, @Param('id') id) {
+    return this._taskService.updateTask(id, task);
   }
   @Delete(':id')
-  deleteTask(@Param('id') id) {
-    // tslint:disable-next-line:no-console
-    console.log(id);
-    return 'delete task';
+  deleteTask(@Param('id') id): Promise<Task> {
+    return this._taskService.deleteTask(id);
   }
 }
