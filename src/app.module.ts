@@ -7,7 +7,7 @@ import { TaskModule } from './task/task.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [TaskModule, MongooseModule.forRoot('mongodb://localhost/backtask')],
+  imports: [TaskModule, MongooseModule.forRoot('mongodb+srv://root:root@cluster0-kvq0y.mongodb.net/test?retryWrites=true&w=majority')],
   controllers: [AppController],
   providers: [AppService],
 })
