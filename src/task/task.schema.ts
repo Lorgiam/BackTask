@@ -5,4 +5,3 @@ export const TaskSchema = new mongoose.Schema({
     description: String,
     done: Boolean,
 });
-
